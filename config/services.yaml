@@ -4,8 +4,14 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    STRIPE_KEY: '%env(STRIPE_KEY)%'
 
 services:
+App\Twig\Extension\AppExtension:
+        arguments:
+            $configRepo: '@App\Repository\ConfigurationRepository'
+        tags:
+            - { name: 'twig.extension' }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

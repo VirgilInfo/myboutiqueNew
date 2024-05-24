@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire de commentaire du Produit:
+
+{% endblock %}
+
+{% block content %}
+
+
+	{% if product.isProductFromUser(app.user) %}
+
+		{% if not product.alreadyComment(app.user) %}
+
+			<h1 class="mt-3">Poster le commentaire de
+				{{product.name}}</h1>
+
+			<div class="alert alert-light">
+				{{ form_start(form) }}
+
+				{{ form_end(form) }}
+			</div>
+        {% else %}
+    
+	<div class="alert alert-danger mt-4">Vous avez déjà commenté le produit:
+			{{product.name}}</div>
+
+		{% endif %}
+
+	{% else %}
+
+		<div class="alert alert-danger mt-4">Vous n'avez pas acheté ce produit:
+			{{product.name}}</div>
+
+	{% endif %}
+
+{% endblock %}
